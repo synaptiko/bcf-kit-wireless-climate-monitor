@@ -80,7 +80,7 @@ void climate_module_event_handler(bc_module_climate_event_t event, void *event_p
         {
             if ((fabs(value - params.humidity.value) >= HUMIDITY_TAG_PUB_VALUE_CHANGE) || (params.humidity.next_pub < bc_scheduler_get_spin_tick()))
             {
-                bc_radio_pub_humidity(BC_RADIO_PUB_CHANNEL_R3_I2C0_ADDRESS_DEFAULT, &value);
+                bc_radio_pub_humidity(BC_RADIO_PUB_CHANNEL_R2_I2C1_ADDRESS_DEFAULT, &value);
                 params.humidity.value = value;
                 params.humidity.next_pub = bc_scheduler_get_spin_tick() + HUMIDITY_TAG_PUB_NO_CHANGE_INTEVAL;
             }
@@ -137,7 +137,7 @@ void application_init(void)
    bc_button_set_event_handler(&button, button_event_handler, &button_event_count);
 
    // Initialize battery
-   bc_module_battery_init(BC_MODULE_BATTERY_FORMAT_MINI);
+   bc_module_battery_init(BC_MODULE_BATTERY_FORMAT_STANDARD);
    bc_module_battery_set_event_handler(battery_event_handler, NULL);
    bc_module_battery_set_update_interval(BATTERY_UPDATE_INTERVAL);
 
